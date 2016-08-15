@@ -1,0 +1,11 @@
+{%extends "master.html"%}
+{%block contenido%}
+<div class="container">
+<div class="well well-lg">
+	<div class="form-group">
+		<h1>¡ERROR AL REGISTRARSE¡</h1>
+		<a href="{% url 'blog.views.crearusuario' %}">Nuevo Usuario<span class="glyphicon glyphicon-user" aria-hidden="true"></span></a><br>
+	</div>
+</div>
+</div>
+{%endblock%}

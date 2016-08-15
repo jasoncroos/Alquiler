@@ -1,0 +1,14 @@
+{%extends "master.html"%}
+{%block contenido%}
+<div class="container">
+<h1>Iniciar Sesion</h1>
+<div class="well well-lg">
+<form method="POST" action="">{% csrf_token %}
+	<div class="form-group">
+		{{finicio.as_p}}
+		<input type="submit" value="Aceptar" class="btn btn-success"></input>
+	</div>
+</form>
+</div>
+</div>
+{%endblock%}

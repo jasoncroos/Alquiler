@@ -1,0 +1,84 @@
+{%extends "master.html"%}
+{%block contenido%}
+<div class="container"> 
+	<h1>LISTA DE VEHÍCULOS</h1>
+	<div class="well well-lg"> 
+	{% if user.is_authenticated %}
+		{% if user.is_superuser %}
+			<p>ADMINISTRADOR</p>
+			<a href="{% url 'blog.views.cerrarsesion' %}">Cerrar Sesion</a><br><br><br>
+			<a href="registrarvehiculo">Registrar Vehiculo <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a><br>
+			<table class="table table-bordered">
+				<tr>
+					<td><center><b>MATRICULA<b></center></td>
+					<td><center><b>MARCA</b></center></td>
+					<td><center><b>TIPO<b></center></td>
+					<td><center><b>MODELO<b></center></td>
+					<td><center><b>AÑO<b></center></td>
+					<td><center><b>COLOR<b></center></td>
+					<td><center><b>IMAGEN<b></center></td>
+					<td><center><b>PRECIO<b></center></td>
+					<td><center><b>ESTADO<b></center></td>
+					<td><center><b>AGENCIA<b></center></td>
+					<td><center><b>GARAGE<b></center></td> 
+				</tr>
+				{%for v in vehiculos%}
+					<tr>
+						<td><center>{{v.matricula}}</center></td>
+						<td><center>{{v.marca}}</center></td>
+						<td><center>{{v.tipo}}</center></td>
+						<td><center>{{v.modelo}}</center></td>
+						<td><center>{{v.anio}}</center></td>
+						<td><center>{{v.color}}</center></td>
+						<td><center><img src="{{v.imagen.url}}"></center></td>
+						<td><center>{{v.precio}}</center></td>
+						<td><center>{{v.estado}}</center></td>
+						<td><center>{{v.idAgencia}}</center></td>
+						<td><center>{{v.idGarage}}</center></td>
+						<td><center><a href="/blog/modificar?matricula={{v.matricula}}">|<span class="glyphicon glyphicon-pencil" ari-hidden="true"></span></a><a href="/blog/eliminar?id={{v.id}}">|<span class="glyphicon glyphicon-remove" ari-hidden="true"></span>|</a></center></td>
+					</tr>
+				{%endfor%}
+			</table>
+		{% else %}
+			<p>USUARIO<p>
+			<a href="{% url 'blog.views.cerrarsesion' %}">Cerrar Sesion</a><br><br><br>
+			<table class="table table-bordered">
+				<tr>
+					<td><center><b>MATRICULA<b></center></td>
+					<td><center><b>MARCA</b></center></td>
+					<td><center><b>TIPO<b></center></td>
+					<td><center><b>MODELO<b></center></td>
+					<td><center><b>AÑO<b></center></td>
+					<td><center><b>COLOR<b></center></td>
+					<td><center><b>IMAGEN<b></center></td>
+					<td><center><b>PRECIO<b></center></td>
+					<td><center><b>AGENCIA<b></center></td>
+					<td><center><b>GARAGE<b></center></td> 
+				</tr>
+				{%for v in vehiculos%}
+					<tr>
+						<td><center>{{v.matricula}}</center></td>
+						<td><center>{{v.marca}}</center></td>
+						<td><center>{{v.tipo}}</center></td>
+						<td><center>{{v.modelo}}</center></td>
+						<td><center>{{v.anio}}</center></td>
+						<td><center>{{v.color}}</center></td>
+						<td><center><img src="{{v.imagen.url}}"></center></td>
+						<td><center>{{v.precio}}</center></td>
+						<td><center>{{v.idAgencia}}</center></td>
+						<td><center>{{v.idGarage}}</center></td>
+						{% if v.estado == "Ocupado" %}
+							<td class="danger">NO Disponible</td>
+						{% else %}
+							<td><button type="button" class="btn btn-primary">Alquilar</button></td>
+						{% endif %}
+					</tr>
+				{%endfor%}
+			</table>
+		{% endif %}
+	{% else %}
+		<a href="{% url 'blog.views.iniciosesion' %}">Iniciar Sesion<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span></a><br>
+	{% endif %}
+	</div>
+</div>
+{%endblock%}

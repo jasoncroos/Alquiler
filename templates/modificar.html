@@ -1,0 +1,16 @@
+{%extends "master.html"%}
+{%block contenido%}
+<div class="container">
+<h1>MODIFICAR VEHICULO</h1>
+<div class="well well-lg">
+<form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+	<div class="form-group">
+		<table class="table table-bordered">
+			{{fv.as_table}}
+		</table>
+		<input type="submit" value="Aceptar" class="btn btn-success"></input>
+	</div>
+</form>
+</div>
+</div>
+{%endblock%} 
